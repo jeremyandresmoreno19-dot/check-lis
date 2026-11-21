@@ -134,7 +134,12 @@ figure{margin:0}
 .sig{height:62px;border:1px dashed var(--app-muted);border-radius:8px;background:var(--app-card);position:relative}
 .sig svg{position:absolute;inset:0;width:100%;height:100%}
 .sig .who{position:absolute;left:8px;bottom:4px;font-size:9.5px;color:var(--app-muted)}
-.yn{display:flex;gap:6px}
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.yn.sm span{padding:6px 4px;font-size:11.5px}
+.yn span.warn{color:#8a6100;border-color:var(--app-warn)}
+.yn span.oos{color:var(--app-fg);border-color:var(--app-fg)}
+.yn span.no{color:var(--app-bad);border-color:var(--app-bad)}
+.tag.oos{background:var(--app-fg);color:#fff}
 .yn span{flex:1;text-align:center;padding:7px;border-radius:8px;border:1px solid var(--app-line);font-weight:600;background:var(--app-card)}
 .yn span.on{background:var(--app-ok);color:#fff;border-color:var(--app-ok)}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:var(--app-ok)}
@@ -269,7 +274,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
       <div class="step"><div class="n">PASO 1</div><h3>Ingreso</h3><p>Datos del equipo, del usuario y del mantenedor. Con el QR o la patente, equipo, marca, modelo y empresa aparecen solos.</p></div>
       <div class="step"><div class="n">PASO 2</div><h3>Inventario y chequeo</h3><p>El mecánico marca B, M o N/A en accesorios y en cada sistema. Cada M pide foto y comentario.</p></div>
       <div class="step"><div class="n">PASO 3</div><h3>Trabajo</h3><p>La ficha se va llenando a medida que avanza la reparación. Se guarda sola y se puede retomar en cualquier momento.</p></div>
-      <div class="step"><div class="n">PASO 4</div><h3>Firma de entrega</h3><p>Al final, solo cuando el equipo queda funcionando: firma el mecánico que entrega y el operador que recibe.</p></div>
+      <div class="step"><div class="n">PASO 4</div><h3>Firma de entrega</h3><p>Al final se elige el estado: conforme, no conforme, queda pendiente o fuera de servicio. Firma el mecánico que entrega y el operador que recibe.</p></div>
       <div class="step"><div class="n">PASO 5</div><h3>Entrega de turno</h3><p>Al cerrar el turno se genera el recopilado de todo lo hecho, listo para enviar.</p></div>
     </div>
   </div>
@@ -300,7 +305,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
       </div>
       <div class="blk"><div class="n">BLOQUE 6</div><h3>Usuario solicita</h3><ul><li>Lo que pide el usuario al dejar el equipo</li></ul></div>
       <div class="blk"><div class="n">BLOQUE 7</div><h3>Observaciones / trabajo realizado</h3><ul><li>Se va escribiendo durante el trabajo</li><li>Repuestos usados</li></ul></div>
-      <div class="blk"><div class="n">BLOQUE 8 · AL FINAL</div><h3>Firmas y fecha</h3><ul><li>Nombre / firma del mecánico que entrega</li><li>Nombre / firma del operador que recibe</li><li>Fecha (automática)</li></ul></div>
+      <div class="blk"><div class="n">BLOQUE 8 · AL FINAL</div><h3>Firmas y fecha</h3><ul><li>Nombre / firma del mecánico que entrega</li><li>Nombre / firma del operador que recibe</li><li>Estado de salida: conforme / no conforme / queda pendiente / fuera de servicio</li><li>Fecha (automática)</li></ul></div>
     </div>
   </div>
 </section>
@@ -461,7 +466,6 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
           <div class="sb"><span>11:48</span><span>4G ▪ 64%</span></div>
           <div class="ab"><div class="t">Cierre y firma</div><div class="s">Paso 5 de 5 · HJKL·42</div><div class="prog"><i style="width:100%"></i></div></div>
           <div class="body" style="gap:7px">
-            <div class="card row" style="background:var(--app-ok-soft);border-color:var(--app-ok)"><span style="color:var(--app-ok);font-weight:600">✓ Equipo operativo · listo para entregar</span></div>
             <div class="card stack" style="gap:5px">
               <div class="lbl">Observaciones / trabajo realizado</div>
               <div style="font-size:11.5px">Cambio de sello cilindro pluma y filtro DPF. Prueba OK.</div>
@@ -477,13 +481,13 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
               <svg viewBox="0 0 260 62" fill="none"><path d="M20 38c10-16 18-18 22-6s14 2 20-10 16 18 30 6 16-8 28 0" stroke="#0a3a9c" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
               <span class="who">Recibe: Luis Soto · Operador · 12.345.678-9</span>
             </div>
-            <div class="lbl">¿Equipo conforme?</div>
-            <div class="yn"><span class="on">SÍ</span><span>NO</span></div>
+            <div class="lbl">Estado de salida del equipo</div>
+            <div class="yn sm"><span class="on">✓ Conforme</span><span class="no">No conforme</span><span class="warn">Queda pendiente</span><span class="oos">Fuera de servicio</span></div>
             <div style="font-size:10.5px;color:var(--app-muted)">Salida: 21-11 · 11:48 (automática)</div>
           </div>
           <div style="padding:0 12px 16px"><div class="btn">Cerrar ficha y generar PDF</div></div>
         </div></div>
-        <figcaption><b>5 · Cierre, firma y conformidad</b>Las observaciones se van escribiendo durante el trabajo. La firma se habilita al final, cuando el equipo queda funcionando. Solo dos firmas: el mecánico que entrega el equipo y el operador que lo recibe. Si el operador marca NO, la ficha queda abierta con el motivo y vuelve al taller.</figcaption>
+        <figcaption><b>5 · Cierre, firma y conformidad</b>Las observaciones se van escribiendo durante el trabajo. Al final se elige el estado de salida y firman el mecánico que entrega y el operador que recibe.<br><b style="display:inline;font-family:inherit;font-size:inherit">Conforme:</b> ficha cerrada. <b style="display:inline;font-family:inherit;font-size:inherit">No conforme:</b> vuelve a reparación con el motivo. <b style="display:inline;font-family:inherit;font-size:inherit">Queda pendiente:</b> se anota qué falta (repuesto, prueba) y pasa al turno siguiente. <b style="display:inline;font-family:inherit;font-size:inherit">Fuera de servicio:</b> el equipo queda bloqueado, con motivo obligatorio y aviso al jefe de taller.</figcaption>
       </figure>
 
       <!-- 5. Entrega de turno -->
@@ -508,7 +512,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
               <div class="lbl">Pasa al turno B</div>
               <div class="row"><span class="plate">MC-017</span><span class="tag bad">Esp. repuesto</span></div>
               <div class="row"><span class="plate">PRZX·77</span><span class="tag warn">En reparación</span></div>
-              <div class="row"><span class="plate">EX-204</span><span class="tag warn">En reparación</span></div>
+              <div class="row"><span class="plate">EX-204</span><span class="tag oos">Fuera de servicio</span></div>
             </div>
             <div class="card"><div class="lbl">Nota para el turno B</div><div style="font-size:11.5px">MC-017: llega pastilla freno mañana 09:00.</div></div>
           </div>
@@ -606,7 +610,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
         <ul>
           <li><b>QR pegado en cada equipo</b>: escanear y quedan cargados los datos y el historial.</li>
           <li><b>Foto y comentario obligatorios</b> en cada ítem malo.</li>
-          <li><b>Estados del equipo</b>: recién llegó, chequeando, en reparación, esperando repuesto, listo para firma, entregado.</li>
+          <li><b>Estados del equipo</b>: recién llegó, chequeando, en reparación, esperando repuesto, listo para firma, entregado conforme, queda pendiente, fuera de servicio.</li>
           <li><b>Repuestos</b> con cantidad, para saber el costo por equipo.</li>
           <li><b>Historial</b>: el mecánico ve las últimas 3 fallas del equipo antes de empezar.</li>
           <li><b>Alerta de horómetro</b> si es menor al último registrado o si toca mantención.</li>
@@ -652,6 +656,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
       <div class="fx-row"><div><div class="lab">Falla</div>Se olvida hacer la entrega de turno.</div><div><div class="lab">Solución</div>A la hora de término llega un recordatorio. Si no se firma, el sistema arma el recopilado igual y lo marca "sin firma".</div></div>
       <div class="fx-row"><div><div class="lab">Falla</div>El operador que recibe no queda conforme con el trabajo.</div><div><div class="lab">Solución</div>Marcar NO obliga a escribir el motivo. La ficha vuelve al estado "en reparación" y queda registrado el reingreso.</div></div>
       <div class="fx-row"><div><div class="lab">Falla</div>Fotos pesadas que llenan el celular y gastan datos.</div><div><div class="lab">Solución</div>Las fotos se comprimen al tomarlas y se suben por WiFi cuando es posible.</div></div>
+      <div class="fx-row"><div><div class="lab">Falla</div>Un equipo fuera de servicio se vuelve a usar sin que nadie lo sepa.</div><div><div class="lab">Solución</div>Queda bloqueado y en rojo en el panel hasta un nuevo ingreso. El motivo es obligatorio y el jefe de taller recibe un aviso.</div></div>
       <div class="fx-row"><div><div class="lab">Falla</div>Alguien modifica una ficha después de firmada.</div><div><div class="lab">Solución</div>La ficha firmada queda bloqueada. Los cambios se hacen como anexo con nombre, hora y motivo.</div></div>
     </div>
   </div>
