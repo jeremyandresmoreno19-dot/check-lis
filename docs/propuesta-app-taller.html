@@ -255,7 +255,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
       <div class="step"><div class="n">PASO 1</div><h3>Ingreso</h3><p>Se escanea el QR del equipo o se escribe la patente. Marca, modelo y último horómetro aparecen solos.</p></div>
       <div class="step"><div class="n">PASO 2</div><h3>Chequeo</h3><p>El mecánico marca B, M o N/A. Cada M pide foto y comentario.</p></div>
       <div class="step"><div class="n">PASO 3</div><h3>Trabajo</h3><p>Se registra lo realizado y los repuestos. El estado cambia a "en reparación" o "esperando repuesto".</p></div>
-      <div class="step"><div class="n">PASO 4</div><h3>Firma y salida</h3><p>Firma en pantalla del usuario y del mecánico. Conforme SÍ / NO, hora de salida automática.</p></div>
+      <div class="step"><div class="n">PASO 4</div><h3>Firma y salida</h3><p>Firma en pantalla del mecánico que entrega y del operador que recibe. Conforme SÍ / NO, hora de salida automática.</p></div>
       <div class="step"><div class="n">PASO 5</div><h3>Entrega de turno</h3><p>Al cerrar el turno se genera el recopilado de todo lo hecho, listo para enviar.</p></div>
     </div>
   </div>
@@ -385,11 +385,11 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
             </div>
             <div class="sig">
               <svg viewBox="0 0 260 62" fill="none"><path d="M18 42c14-22 22-26 26-12s8 14 16-4 12-14 14 2 10 10 22-8 18-6 24 6" stroke="#141a26" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-              <span class="who">Entrega: Luis Soto · 12.345.678-9</span>
+              <span class="who">Entrega: J. Pérez · Mecánico · 15.678.234-5</span>
             </div>
             <div class="sig">
               <svg viewBox="0 0 260 62" fill="none"><path d="M20 38c10-16 18-18 22-6s14 2 20-10 16 18 30 6 16-8 28 0" stroke="#0a3a9c" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-              <span class="who">Recibe: J. Pérez · Mecánico</span>
+              <span class="who">Recibe: Luis Soto · Operador · 12.345.678-9</span>
             </div>
             <div class="lbl">¿Equipo conforme?</div>
             <div class="yn"><span class="on">SÍ</span><span>NO</span></div>
@@ -397,7 +397,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
           </div>
           <div style="padding:0 12px 16px"><div class="btn">Cerrar ficha y generar PDF</div></div>
         </div></div>
-        <figcaption><b>4 · Cierre, firma y conformidad</b>Firma con el dedo. Si el usuario marca NO, la ficha queda abierta con el motivo y vuelve al taller.</figcaption>
+        <figcaption><b>4 · Cierre, firma y conformidad</b>Solo dos firmas: el mecánico que entrega el equipo y el operador que lo recibe. Si el operador marca NO, la ficha queda abierta con el motivo y vuelve al taller.</figcaption>
       </figure>
 
       <!-- 5. Entrega de turno -->
@@ -564,7 +564,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
       <div class="fx-row"><div><div class="lab">Falla</div>Patente o número interno mal escrito, y el historial queda partido en dos.</div><div><div class="lab">Solución</div>Ingreso por QR. Si se escribe a mano, se valida el formato de patente chilena y se sugieren equipos ya registrados.</div></div>
       <div class="fx-row"><div><div class="lab">Falla</div>Dos mecánicos editan la misma ficha a la vez.</div><div><div class="lab">Solución</div>Cada sistema del checklist queda asignado a quien lo abrió. El otro ve "R. Díaz está revisando frenos" y trabaja en otro sistema.</div></div>
       <div class="fx-row"><div><div class="lab">Falla</div>Se olvida hacer la entrega de turno.</div><div><div class="lab">Solución</div>A la hora de término llega un recordatorio. Si no se firma, el sistema arma el recopilado igual y lo marca "sin firma".</div></div>
-      <div class="fx-row"><div><div class="lab">Falla</div>El usuario no queda conforme con el trabajo.</div><div><div class="lab">Solución</div>Marcar NO obliga a escribir el motivo. La ficha vuelve al estado "en reparación" y queda registrado el reingreso.</div></div>
+      <div class="fx-row"><div><div class="lab">Falla</div>El operador que recibe no queda conforme con el trabajo.</div><div><div class="lab">Solución</div>Marcar NO obliga a escribir el motivo. La ficha vuelve al estado "en reparación" y queda registrado el reingreso.</div></div>
       <div class="fx-row"><div><div class="lab">Falla</div>Fotos pesadas que llenan el celular y gastan datos.</div><div><div class="lab">Solución</div>Las fotos se comprimen al tomarlas y se suben por WiFi cuando es posible.</div></div>
       <div class="fx-row"><div><div class="lab">Falla</div>Alguien modifica una ficha después de firmada.</div><div><div class="lab">Solución</div>La ficha firmada queda bloqueada. Los cambios se hacen como anexo con nombre, hora y motivo.</div></div>
     </div>
@@ -585,7 +585,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
       <div class="box"><div class="lbl2">Salidas</div><h3>PDF · Excel · correo</h3><p>PDF de cada ficha con el diseño de la hoja actual. Excel y PDF del recopilado de turno.</p></div>
     </div>
     <div class="read" style="margin-top:20px">
-      <p class="muted">Roles: <b>mecánico</b> (llena fichas), <b>jefe de taller</b> (ve todo, asigna, cierra turnos), <b>usuario / chofer</b> (solo firma y ve el estado de su equipo) y <b>administrador</b> (plantillas, equipos y usuarios).</p>
+      <p class="muted">Roles: <b>mecánico</b> (llena fichas), <b>jefe de taller</b> (ve todo, asigna, cierra turnos), <b>operador / chofer</b> (firma al recibir el equipo y ve su estado) y <b>administrador</b> (plantillas, equipos y usuarios).</p>
     </div>
   </div>
 </section>
