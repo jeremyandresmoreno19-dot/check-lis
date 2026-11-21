@@ -115,6 +115,9 @@ figure{margin:0}
 .prog i{display:block;height:100%;background:var(--app-warn)}
 .tight .field{padding:3px 7px}
 .tight .grid2{gap:5px}
+.grid2.g3{grid-template-columns:1.25fr 1.25fr 1fr}
+.g3 .field .val{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g3 .field{min-width:0}
 .compact .item{padding:3px 0}
 .compact .bm span{height:21px;width:28px}
 .colh{display:grid;grid-template-columns:1fr auto;gap:6px;padding-bottom:3px;border-bottom:1px solid var(--app-line)}
@@ -291,8 +294,8 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
     </div>
     <div class="spec">
       <div class="blk"><div class="n">BLOQUE 1</div><h3>Datos del equipo</h3><ul><li>Equipo</li><li>Marca</li><li>Modelo</li><li>Patente</li><li>Número interno</li><li>Empresa</li><li>Horómetro / kilometraje</li></ul></div>
-      <div class="blk"><div class="n">BLOQUE 2</div><h3>Datos del usuario</h3><ul><li>Nombre</li><li>Área</li></ul></div>
-      <div class="blk"><div class="n">BLOQUE 3</div><h3>Datos del mantenedor mecánico</h3><ul><li>Nombre</li><li>Turno</li></ul></div>
+      <div class="blk"><div class="n">BLOQUE 2</div><h3>Datos del usuario</h3><ul><li>Nombre</li><li>Área</li><li>Turno</li></ul></div>
+      <div class="blk"><div class="n">BLOQUE 3</div><h3>Datos del mantenedor mecánico</h3><ul><li>Nombre</li><li>Área</li><li>Turno</li></ul></div>
       <div class="blk"><div class="n">BLOQUE 4 · <span class="k b">B</span> <span class="k m">M</span> <span class="k n">N/A</span></div><h3>Inventario / accesorios</h3><ul><li>Radio</li><li>Cinturón de seguridad</li><li>Llave de ruedas</li><li>Gata y barra</li><li>Extintor</li><li>Jaula antivuelco</li><li>Cuñas</li><li>Alarma de retroceso</li><li>Bocina</li><li>Rueda de repuesto</li><li>Neumáticos / orugas</li><li>Llantas / bastidor</li></ul></div>
       <div class="blk wide"><div class="n">BLOQUE 5 · <span class="k b">B</span> <span class="k m">M</span> <span class="k n">N/A</span></div><h3>Chequeo visual preventivo</h3>
         <div class="sys">
@@ -375,23 +378,25 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
             </div>
             <div class="card stack" style="gap:6px">
               <div class="lbl">Datos del usuario</div>
-              <div class="grid2">
+              <div class="grid2 g3">
                 <div class="field"><div class="lbl">Nombre</div><div class="val">Luis Soto</div></div>
                 <div class="field"><div class="lbl">Área</div><div class="val">Operaciones</div></div>
+                <div class="field"><div class="lbl">Turno</div><div class="val">A · Día</div></div>
                 <div class="field" style="grid-column:1/-1"><div class="lbl">Usuario solicita</div><div class="val" style="font-weight:400">Pierde aceite por cilindro de pluma 🎙</div></div>
               </div>
             </div>
             <div class="card stack" style="gap:6px">
               <div class="row"><div class="lbl">Mantenedor mecánico</div><span class="tag ok">Auto</span></div>
-              <div class="grid2">
+              <div class="grid2 g3">
                 <div class="field"><div class="lbl">Nombre</div><div class="val">Juan Pérez</div></div>
+                <div class="field"><div class="lbl">Área</div><div class="val">Mantención</div></div>
                 <div class="field"><div class="lbl">Turno</div><div class="val">A · Día</div></div>
               </div>
             </div>
           </div>
           <div style="padding:0 12px 16px"><div class="btn">Siguiente: inventario →</div></div>
         </div></div>
-        <figcaption><b>2 · Datos del equipo, usuario y mecánico</b>El QR o la patente traen equipo, marca, modelo y empresa. El horómetro / kilometraje se escribe y se compara con el último registro. Nombre y turno del mecánico salen de su sesión. La solicitud se puede dictar por voz.</figcaption>
+        <figcaption><b>2 · Datos del equipo, usuario y mecánico</b>El QR o la patente traen equipo, marca, modelo y empresa. El horómetro / kilometraje se escribe y se compara con el último registro. Nombre, área y turno del mecánico salen de su sesión. La solicitud se puede dictar por voz.</figcaption>
       </figure>
 
       <!-- 3. Inventario -->
@@ -623,7 +628,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
         <h3><span class="sq" style="background:var(--bad)"></span>Sacar o simplificar</h3>
         <ul>
           <li><b>Fecha y hora a mano</b>: las pone el sistema.</li>
-          <li><b>Datos del mantenedor</b> (nombre, turno): salen del inicio de sesión.</li>
+          <li><b>Datos del mantenedor</b> (nombre, área, turno): salen del inicio de sesión.</li>
           <li><b>Ítems repetidos</b> entre la ficha PDF y el Excel: "Pértiga" y "Estado de neumáticos" aparecen en ambas.</li>
           <li><b>Filas en blanco</b> del inventario: se reemplazan por "+ agregar ítem".</li>
           <li><b>"Operativo / No operativo"</b> y <b>"B / M"</b>: se usa una sola escala, B / M / N/A.</li>
