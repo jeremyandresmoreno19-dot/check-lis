@@ -113,6 +113,20 @@ figure{margin:0}
 .bm span.n{background:var(--app-muted);border-color:var(--app-muted);color:#fff}
 .prog{height:6px;border-radius:3px;background:rgba(255,255,255,.25);margin-top:8px;overflow:hidden}
 .prog i{display:block;height:100%;background:var(--app-warn)}
+.compact .item{padding:3px 0}
+.compact .bm span{height:21px;width:28px}
+.colh{display:grid;grid-template-columns:1fr auto;gap:6px;padding-bottom:3px;border-bottom:1px solid var(--app-line)}
+.colh .bm span{border:0;background:transparent;height:auto;font-size:9px}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}
+.blk{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;min-width:0}
+.blk .n{font-family:var(--f-mono);font-size:.72rem;color:var(--brand);font-weight:700}
+.blk h3{font-size:1.15rem;margin:4px 0 8px}
+.blk ul{margin:0;padding-left:18px;font-size:.94rem}
+.blk .sub{font-family:var(--f-display);font-weight:600;font-size:1rem;margin-top:10px;text-transform:uppercase;letter-spacing:.03em}
+.blk .sub:first-of-type{margin-top:0}
+.blk .tbd{color:var(--muted);font-style:italic}
+.blk.wide{grid-column:1/-1}
+.blk.wide .sys{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 20px}
 .fail{background:var(--app-bad-soft);border:1px solid #f0bcbc;border-radius:8px;padding:7px;display:flex;flex-direction:column;gap:5px}
 .photo{display:flex;gap:5px}
 .photo i{width:44px;height:36px;border-radius:5px;background:repeating-linear-gradient(135deg,#c9ced9 0 6px,#d9dde6 6px 12px)}
@@ -244,18 +258,18 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
         <div class="eyebrow">Ficha unificada en la app</div>
         <h3>Arriba · Centro · Abajo</h3>
         <ul>
-          <li><b>Arriba:</b> usuario, equipo y mecánico (se autocompletan)</li>
-          <li><b>Centro:</b> inventario + 8 sistemas, cada ítem <span class="k b">B</span> <span class="k m">M</span> <span class="k n">N/A</span></li>
-          <li><b>Abajo:</b> trabajo realizado, repuestos, firmas, fecha y conformidad</li>
+          <li><b>Arriba:</b> datos del equipo, del usuario y del mantenedor mecánico</li>
+          <li><b>Centro:</b> inventario / accesorios y chequeo visual por sistemas, cada ítem <span class="k b">B</span> <span class="k m">M</span> <span class="k n">N/A</span></li>
+          <li><b>Abajo:</b> observaciones / trabajo realizado, firma del mecánico que entrega y del operador que recibe, fecha</li>
         </ul>
       </div>
     </div>
 
     <div class="flow" aria-label="Flujo de trabajo">
-      <div class="step"><div class="n">PASO 1</div><h3>Ingreso</h3><p>Se escanea el QR del equipo o se escribe la patente. Marca, modelo y último horómetro aparecen solos.</p></div>
-      <div class="step"><div class="n">PASO 2</div><h3>Chequeo</h3><p>El mecánico marca B, M o N/A. Cada M pide foto y comentario.</p></div>
-      <div class="step"><div class="n">PASO 3</div><h3>Trabajo</h3><p>Se registra lo realizado y los repuestos. El estado cambia a "en reparación" o "esperando repuesto".</p></div>
-      <div class="step"><div class="n">PASO 4</div><h3>Firma y salida</h3><p>Firma en pantalla del mecánico que entrega y del operador que recibe. Conforme SÍ / NO, hora de salida automática.</p></div>
+      <div class="step"><div class="n">PASO 1</div><h3>Ingreso</h3><p>Datos del equipo, del usuario y del mantenedor. Con el QR o la patente, equipo, marca, modelo y empresa aparecen solos.</p></div>
+      <div class="step"><div class="n">PASO 2</div><h3>Inventario y chequeo</h3><p>El mecánico marca B, M o N/A en accesorios y en cada sistema. Cada M pide foto y comentario.</p></div>
+      <div class="step"><div class="n">PASO 3</div><h3>Trabajo</h3><p>La ficha se va llenando a medida que avanza la reparación. Se guarda sola y se puede retomar en cualquier momento.</p></div>
+      <div class="step"><div class="n">PASO 4</div><h3>Firma de entrega</h3><p>Al final, solo cuando el equipo queda funcionando: firma el mecánico que entrega y el operador que recibe.</p></div>
       <div class="step"><div class="n">PASO 5</div><h3>Entrega de turno</h3><p>Al cerrar el turno se genera el recopilado de todo lo hecho, listo para enviar.</p></div>
     </div>
   </div>
@@ -264,8 +278,38 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 <section>
   <div class="wrap">
     <div class="read stack">
-      <div class="eyebrow">02 · Cómo se vería en el celular</div>
-      <h2>Cinco pantallas cubren todo el turno</h2>
+      <div class="eyebrow">02 · Contenido de la ficha</div>
+      <h2>Campo por campo, en el orden en que se llena</h2>
+      <p class="muted">La ficha se abre al ingresar el equipo y se completa mientras se trabaja. La firma va al final, cuando el equipo está operativo y listo para entregar.</p>
+    </div>
+    <div class="spec">
+      <div class="blk"><div class="n">BLOQUE 1</div><h3>Datos del equipo</h3><ul><li>Equipo</li><li>Marca</li><li>Modelo</li><li>Patente</li><li>Número interno</li><li>Empresa</li></ul></div>
+      <div class="blk"><div class="n">BLOQUE 2</div><h3>Datos del usuario</h3><ul><li>Nombre</li><li>Área</li></ul></div>
+      <div class="blk"><div class="n">BLOQUE 3</div><h3>Datos del mantenedor mecánico</h3><ul><li>Nombre</li><li>Turno</li></ul></div>
+      <div class="blk"><div class="n">BLOQUE 4 · <span class="k b">B</span> <span class="k m">M</span> <span class="k n">N/A</span></div><h3>Inventario / accesorios</h3><ul><li>Radio</li><li>Cinturón de seguridad</li><li>Llave de ruedas</li><li>Gata y barra</li><li>Extintor</li><li>Jaula antivuelco</li><li>Cuñas</li><li>Alarma de retroceso</li><li>Bocina</li><li>Rueda de repuesto</li><li>Neumáticos / orugas</li><li>Llantas / bastidor</li></ul></div>
+      <div class="blk wide"><div class="n">BLOQUE 5 · <span class="k b">B</span> <span class="k m">M</span> <span class="k n">N/A</span></div><h3>Chequeo visual preventivo</h3>
+        <div class="sys">
+          <div><div class="sub">Sistema de carga</div><ul><li>Batería</li><li>Alternador</li><li>Ramal eléctrico</li></ul></div>
+          <div><div class="sub">Sistema de luces</div><ul><li>Estado focos (traseros y delanteros)</li><li>Intermitentes</li><li>Ampolletas</li><li>Pértiga</li><li>Baliza</li></ul></div>
+          <div><div class="sub">Sistema de potencia</div><ul><li>Turbocompresor</li><li>Filtro DPF</li><li>Escape</li></ul></div>
+          <div><div class="sub">Motor</div><ul><li>Visual posibles fugas y fallas</li><li>Mangueras</li><li>Sensores</li><li>Cables</li><li>Correas</li></ul></div>
+          <div><div class="sub">Sistema de ruedas</div><ul><li>Estado neumáticos</li><li>Estado llantas</li><li>Check points</li><li>Torque correspondiente</li><li>Estado tuercas y pernos</li></ul></div>
+          <div><div class="sub">Sistema hidráulico</div><ul><li class="tbd">Ítems por definir</li></ul></div>
+          <div><div class="sub">Sistema de frenos</div><ul><li class="tbd">Ítems por definir</li></ul></div>
+        </div>
+      </div>
+      <div class="blk"><div class="n">BLOQUE 6</div><h3>Usuario solicita</h3><ul><li>Lo que pide el usuario al dejar el equipo</li></ul></div>
+      <div class="blk"><div class="n">BLOQUE 7</div><h3>Observaciones / trabajo realizado</h3><ul><li>Se va escribiendo durante el trabajo</li><li>Repuestos usados</li></ul></div>
+      <div class="blk"><div class="n">BLOQUE 8 · AL FINAL</div><h3>Firmas y fecha</h3><ul><li>Nombre / firma del mecánico que entrega</li><li>Nombre / firma del operador que recibe</li><li>Fecha (automática)</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="read stack">
+      <div class="eyebrow">03 · Cómo se vería en el celular</div>
+      <h2>Seis pantallas cubren todo el turno</h2>
       <p class="muted">Botones grandes para usar con guantes, una sola mano y pocos campos de texto. Los datos de ejemplo son ficticios.</p>
     </div>
 
@@ -308,80 +352,122 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
       <figure class="shot">
         <div class="phone"><div class="scr">
           <div class="sb"><span>08:16</span><span>4G ▪ 82%</span></div>
-          <div class="ab"><div class="t">Nuevo ingreso</div><div class="s">Paso 1 de 4 · Datos</div><div class="prog"><i style="width:25%"></i></div></div>
-          <div class="body">
-            <div class="btn ghost">▣ Escanear QR del equipo</div>
+          <div class="ab"><div class="t">Nuevo ingreso</div><div class="s">Paso 1 de 5 · Datos</div><div class="prog"><i style="width:20%"></i></div></div>
+          <div class="body" style="gap:7px">
             <div class="card stack" style="gap:6px">
-              <div class="lbl">Equipo</div>
+              <div class="row"><div class="lbl">Datos del equipo</div><span class="tag ok">▣ Leído por QR</span></div>
               <div class="grid2">
-                <div class="field"><div class="lbl">Patente / N° interno</div><div class="val mono">HJKL·42 / CA-08</div></div>
-                <div class="field"><div class="lbl">Tipo</div><div class="val">Camión aljibe</div></div>
-                <div class="field"><div class="lbl">Marca / modelo</div><div class="val">Mercedes Atego</div></div>
-                <div class="field"><div class="lbl">Horómetro</div><div class="val mono">8.412 h</div></div>
+                <div class="field"><div class="lbl">Equipo</div><div class="val">Camión aljibe</div></div>
+                <div class="field"><div class="lbl">Marca</div><div class="val">Mercedes-Benz</div></div>
+                <div class="field"><div class="lbl">Modelo</div><div class="val">Atego 1726</div></div>
+                <div class="field"><div class="lbl">Patente</div><div class="val mono">HJKL·42</div></div>
+                <div class="field"><div class="lbl">N° interno</div><div class="val mono">CA-08</div></div>
+                <div class="field"><div class="lbl">Empresa</div><div class="val">Contratista X</div></div>
               </div>
-              <div style="font-size:10.5px;color:var(--app-ok)">✓ Último registro: 8.390 h (12-nov)</div>
             </div>
             <div class="card stack" style="gap:6px">
-              <div class="lbl">Usuario / chofer que entrega</div>
-              <div class="field"><div class="val">Luis Soto · Operaciones</div></div>
-              <div class="lbl">Motivo de ingreso</div>
-              <div class="row" style="gap:4px;justify-content:flex-start">
-                <span class="tag bad">Reparación</span><span class="tag na">Mantención prev.</span><span class="tag na">Revisión</span>
+              <div class="lbl">Datos del usuario</div>
+              <div class="grid2">
+                <div class="field"><div class="lbl">Nombre</div><div class="val">Luis Soto</div></div>
+                <div class="field"><div class="lbl">Área</div><div class="val">Operaciones</div></div>
               </div>
-              <div class="lbl">Usuario solicita</div>
-              <div class="field" style="min-height:38px"><div class="val" style="font-weight:400">Pierde aceite por cilindro de pluma 🎙</div></div>
             </div>
-            <div class="card row"><div><div class="lbl">Mecánico</div><div class="val">J. Pérez · Turno A · Contratista X</div></div><span class="tag ok">Auto</span></div>
+            <div class="card stack" style="gap:6px">
+              <div class="row"><div class="lbl">Mantenedor mecánico</div><span class="tag ok">Auto</span></div>
+              <div class="grid2">
+                <div class="field"><div class="lbl">Nombre</div><div class="val">Juan Pérez</div></div>
+                <div class="field"><div class="lbl">Turno</div><div class="val">A · Día</div></div>
+              </div>
+            </div>
+            <div class="card stack" style="gap:4px">
+              <div class="lbl">Usuario solicita</div>
+              <div style="font-size:11.5px">Pierde aceite por cilindro de pluma 🎙</div>
+            </div>
           </div>
-          <div style="padding:0 12px 16px"><div class="btn">Siguiente: chequeo →</div></div>
+          <div style="padding:0 12px 16px"><div class="btn">Siguiente: inventario →</div></div>
         </div></div>
-        <figcaption><b>2 · Datos del equipo</b>El QR o la patente traen los datos del equipo. El mecánico y la fecha se llenan desde la sesión. La solicitud se puede dictar por voz.</figcaption>
+        <figcaption><b>2 · Datos del equipo, usuario y mecánico</b>El QR o la patente traen equipo, marca, modelo y empresa. Nombre y turno del mecánico salen de su sesión. La solicitud se puede dictar por voz.</figcaption>
+      </figure>
+
+      <!-- 3. Inventario -->
+      <figure class="shot">
+        <div class="phone"><div class="scr">
+          <div class="sb"><span>08:19</span><span>4G ▪ 81%</span></div>
+          <div class="ab"><div class="t">Inventario / accesorios</div><div class="s">Paso 2 de 5 · 12 de 12 ítems</div><div class="prog"><i style="width:40%"></i></div></div>
+          <div class="body compact" style="gap:6px">
+            <div class="card" style="padding:7px 10px">
+              <div class="colh"><span class="lbl">Ítem</span><div class="bm"><span>B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Radio</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Cinturón de seguridad</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Llave de ruedas</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Gata y barra</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Extintor <span class="tag bad">foto ✓</span></span><div class="bm"><span>B</span><span class="m">M</span><span>N/A</span></div></div>
+              <div class="item"><span>Jaula antivuelco</span><div class="bm"><span>B</span><span>M</span><span class="n">N/A</span></div></div>
+              <div class="item"><span>Cuñas</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Alarma de retroceso</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Bocina</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Rueda de repuesto</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Neumáticos / orugas</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Llantas / bastidor</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+            </div>
+            <div style="font-size:10.5px;color:var(--app-bad)">Extintor: carga vencida 08/2026</div>
+          </div>
+          <div style="padding:0 12px 16px"><div class="btn">Siguiente: chequeo visual →</div></div>
+        </div></div>
+        <figcaption><b>3 · Inventario / accesorios</b>Los 12 ítems de la planilla en una sola lista. Un toque por ítem en <span class="k b">B</span> <span class="k m">M</span> o <span class="k n">N/A</span>.</figcaption>
       </figure>
 
       <!-- 3. Checklist -->
       <figure class="shot">
         <div class="phone"><div class="scr">
           <div class="sb"><span>08:22</span><span>Sin señal ▪ 80%</span></div>
-          <div class="ab"><div class="t">Chequeo visual</div><div class="s">Paso 2 de 4 · 23 de 41 ítems</div><div class="prog"><i style="width:56%"></i></div></div>
-          <div class="body" style="gap:6px">
-            <div class="card" style="padding:7px 10px">
+          <div class="ab"><div class="t">Chequeo visual preventivo</div><div class="s">Paso 3 de 5 · 11 de 21 ítems</div><div class="prog"><i style="width:60%"></i></div></div>
+          <div class="body compact" style="gap:5px">
+            <div class="card" style="padding:6px 10px">
+              <div class="sec-h"><span>Sistema de carga</span><span class="tag ok">3/3</span></div>
+            </div>
+            <div class="card" style="padding:6px 10px">
               <div class="sec-h"><span>Sistema de luces</span><span class="tag ok">5/5</span></div>
             </div>
-            <div class="card" style="padding:7px 10px">
-              <div class="sec-h"><span>Sistema hidráulico</span><span class="tag bad">1 malo</span></div>
-              <div class="item"><span>Cilindros</span><div class="bm"><span>B</span><span class="m">M</span><span>N/A</span></div></div>
+            <div class="card" style="padding:6px 10px">
+              <div class="sec-h"><span>Sistema de potencia</span><span class="tag bad">1 malo</span></div>
+              <div class="item"><span>Turbocompresor</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Filtro DPF</span><div class="bm"><span>B</span><span class="m">M</span><span>N/A</span></div></div>
               <div class="fail">
                 <div style="font-weight:600;color:var(--app-bad)">Detalle obligatorio</div>
-                <div class="photo"><i></i><i></i><i class="add"></i></div>
-                <div style="font-size:11px">Fuga en vástago, sello dañado</div>
+                <div class="photo"><i></i><i class="add"></i></div>
+                <div style="font-size:11px">Filtro saturado, testigo encendido</div>
               </div>
-              <div class="item"><span>Mangueras</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
-              <div class="item"><span>Nivel aceite hidráulico</span><div class="bm"><span class="b">B</span><span>M</span><span>N/A</span></div></div>
+              <div class="item"><span>Escape</span><div class="bm"><span>B</span><span>M</span><span>N/A</span></div></div>
             </div>
-            <div class="card" style="padding:7px 10px">
-              <div class="sec-h"><span>Sistema de frenos</span><span class="tag na">0/3</span></div>
-              <div class="item"><span>Freno de servicio</span><div class="bm"><span>B</span><span>M</span><span>N/A</span></div></div>
-              <div class="item"><span>Freno de mano</span><div class="bm"><span>B</span><span>M</span><span>N/A</span></div></div>
+            <div class="card" style="padding:6px 10px">
+              <div class="sec-h"><span>Motor</span><span class="tag na">0/5</span></div>
+            </div>
+            <div class="card" style="padding:6px 10px">
+              <div class="sec-h"><span>Sistema de ruedas</span><span class="tag na">0/5</span></div>
+            </div>
+            <div class="card" style="padding:6px 10px">
+              <div class="sec-h"><span>Hidráulico · Frenos</span><span class="tag na">por definir</span></div>
             </div>
           </div>
-          <div style="padding:0 12px 6px;font-size:10px;color:var(--app-muted);text-align:center">Guardado en el teléfono · se sincroniza al volver la señal</div>
           <div style="padding:0 12px 16px"><div class="btn">Siguiente →</div></div>
         </div></div>
-        <figcaption><b>3 · Chequeo B / M / N/A</b>Sistemas en bloques que se abren y cierran. Un toque por ítem. Marcar <span class="k m">M</span> exige foto y comentario.</figcaption>
+        <figcaption><b>4 · Chequeo visual por sistemas</b>Carga, luces, potencia, motor, ruedas, hidráulico y frenos en bloques que se abren y cierran. Marcar <span class="k m">M</span> exige foto y comentario.</figcaption>
       </figure>
 
       <!-- 4. Cierre y firma -->
       <figure class="shot">
         <div class="phone"><div class="scr">
           <div class="sb"><span>11:48</span><span>4G ▪ 64%</span></div>
-          <div class="ab"><div class="t">Cierre y firma</div><div class="s">Paso 4 de 4 · HJKL·42</div><div class="prog"><i style="width:100%"></i></div></div>
-          <div class="body">
+          <div class="ab"><div class="t">Cierre y firma</div><div class="s">Paso 5 de 5 · HJKL·42</div><div class="prog"><i style="width:100%"></i></div></div>
+          <div class="body" style="gap:7px">
+            <div class="card row" style="background:var(--app-ok-soft);border-color:var(--app-ok)"><span style="color:var(--app-ok);font-weight:600">✓ Equipo operativo · listo para entregar</span></div>
             <div class="card stack" style="gap:5px">
-              <div class="lbl">Trabajo realizado</div>
-              <div style="font-size:11.5px">Cambio de sello de vástago cilindro pluma. Prueba de presión OK.</div>
+              <div class="lbl">Observaciones / trabajo realizado</div>
+              <div style="font-size:11.5px">Cambio de sello cilindro pluma y filtro DPF. Prueba OK.</div>
               <div class="lbl" style="margin-top:4px">Repuestos</div>
               <div class="row" style="font-size:11.5px"><span>Kit sellos cilindro 63 mm</span><span class="mono">1 un</span></div>
-              <div class="row" style="font-size:11.5px"><span>Aceite hidráulico ISO 68</span><span class="mono">8 L</span></div>
+              <div class="row" style="font-size:11.5px"><span>Filtro DPF</span><span class="mono">1 un</span></div>
             </div>
             <div class="sig">
               <svg viewBox="0 0 260 62" fill="none"><path d="M18 42c14-22 22-26 26-12s8 14 16-4 12-14 14 2 10 10 22-8 18-6 24 6" stroke="#141a26" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
@@ -397,7 +483,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
           </div>
           <div style="padding:0 12px 16px"><div class="btn">Cerrar ficha y generar PDF</div></div>
         </div></div>
-        <figcaption><b>4 · Cierre, firma y conformidad</b>Solo dos firmas: el mecánico que entrega el equipo y el operador que lo recibe. Si el operador marca NO, la ficha queda abierta con el motivo y vuelve al taller.</figcaption>
+        <figcaption><b>5 · Cierre, firma y conformidad</b>Las observaciones se van escribiendo durante el trabajo. La firma se habilita al final, cuando el equipo queda funcionando. Solo dos firmas: el mecánico que entrega el equipo y el operador que lo recibe. Si el operador marca NO, la ficha queda abierta con el motivo y vuelve al taller.</figcaption>
       </figure>
 
       <!-- 5. Entrega de turno -->
@@ -428,7 +514,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
           </div>
           <div style="padding:0 12px 16px;display:flex;flex-direction:column;gap:6px"><div class="btn">Firmar y entregar turno</div><div class="btn ghost">Descargar PDF · Excel</div></div>
         </div></div>
-        <figcaption><b>5 · Entrega de turno</b>El recopilado se arma solo con todas las fichas del turno. Queda el registro firmado y lo pendiente pasa al turno siguiente.</figcaption>
+        <figcaption><b>6 · Entrega de turno</b>El recopilado se arma solo con todas las fichas del turno. Queda el registro firmado y lo pendiente pasa al turno siguiente.</figcaption>
       </figure>
     </div>
   </div>
@@ -437,7 +523,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 <section>
   <div class="wrap">
     <div class="read stack">
-      <div class="eyebrow">03 · Cómo se vería en el computador</div>
+      <div class="eyebrow">04 · Cómo se vería en el computador</div>
       <h2>Panel del jefe de taller, en tiempo real</h2>
       <p class="muted">Cada vez que un mecánico marca un ítem o cierra una ficha, el panel se actualiza en segundos. En celular el panel se ve en una sola columna.</p>
     </div>
@@ -487,7 +573,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 <section>
   <div class="wrap">
     <div class="read stack">
-      <div class="eyebrow">04 · Investigación</div>
+      <div class="eyebrow">05 · Investigación</div>
       <h2>Qué hacen las apps que ya se usan</h2>
       <p class="muted">Ninguna está hecha para el formato de taller de faena chileno, pero todas resuelven partes del problema. Esto es lo que vale la pena copiar de cada una.</p>
     </div>
@@ -511,7 +597,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 <section>
   <div class="wrap">
     <div class="read stack">
-      <div class="eyebrow">05 · Qué agregar y qué sacar</div>
+      <div class="eyebrow">06 · Qué agregar y qué sacar</div>
       <h2>Cambios respecto a las fichas actuales</h2>
     </div>
     <div class="cols">
@@ -533,7 +619,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
         <h3><span class="sq" style="background:var(--bad)"></span>Sacar o simplificar</h3>
         <ul>
           <li><b>Fecha y hora a mano</b>: las pone el sistema.</li>
-          <li><b>Datos del mecánico</b> (nombre, turno, empresa): salen del inicio de sesión.</li>
+          <li><b>Datos del mantenedor</b> (nombre, turno): salen del inicio de sesión.</li>
           <li><b>Ítems repetidos</b> entre la ficha PDF y el Excel: "Pértiga" y "Estado de neumáticos" aparecen en ambas.</li>
           <li><b>Filas en blanco</b> del inventario: se reemplazan por "+ agregar ítem".</li>
           <li><b>"Operativo / No operativo"</b> y <b>"B / M"</b>: se usa una sola escala, B / M / N/A.</li>
@@ -555,7 +641,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 <section>
   <div class="wrap">
     <div class="read stack">
-      <div class="eyebrow">06 · Fallas previstas</div>
+      <div class="eyebrow">07 · Fallas previstas</div>
       <h2>Lo que puede salir mal y cómo lo resolvemos</h2>
     </div>
     <div class="fx">
@@ -574,7 +660,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 <section>
   <div class="wrap">
     <div class="read stack">
-      <div class="eyebrow">07 · Cómo construirla</div>
+      <div class="eyebrow">08 · Cómo construirla</div>
       <h2>Una sola app web instalable para celular y computador</h2>
       <p class="muted">Recomiendo una <b>PWA</b> (aplicación web progresiva): se instala desde el navegador como si fuera una app, funciona en Android, iPhone y PC con el mismo código, trabaja sin señal y no depende de las tiendas de apps para actualizarse.</p>
     </div>
@@ -593,7 +679,7 @@ a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 <section>
   <div class="wrap">
     <div class="read stack">
-      <div class="eyebrow">08 · Etapas</div>
+      <div class="eyebrow">09 · Etapas</div>
       <h2>Por dónde empezar</h2>
     </div>
     <div class="phases">
