@@ -35,7 +35,10 @@ Lee este documento completo antes de empezar. Trabaja por fases y en orden. Al f
 
 ## 2. Fase 1: preparar la carpeta de la app
 
-1. Busca `checklis-taller.zip` en *Descargas*. Si no está, pídeselo a la persona.
+1. Busca `checklis-taller.zip` en *Descargas*. Si no está, descárgalo desde GitHub:
+   - Abre <https://github.com/jeremyandresmoreno19-dot/check-lis/raw/claude/focused-pascal-fvrtxd/checklis-taller.zip> en el navegador **donde la persona tiene su sesión de GitHub** (el repositorio puede ser privado).
+   - Si GitHub pide iniciar sesión, **pídele a la persona que entre a su cuenta de GitHub** y vuelve a abrir el enlace.
+   - Si aun así no descarga, abre <https://github.com/jeremyandresmoreno19-dot/check-lis/tree/claude/focused-pascal-fvrtxd>, toca el archivo `checklis-taller.zip` y luego el botón de descarga (ícono ⬇ "Download raw file").
 2. Descomprímelo en la carpeta *Documentos*. Debe quedar `Documentos/checklis-taller/`, que contiene `firebase.json`, `firestore.rules`, `GUIA.md` y la carpeta `public`.
 3. Verifica que existan `Documentos/checklis-taller/firebase.json` y `Documentos/checklis-taller/public/firebase-config.js`.
 
