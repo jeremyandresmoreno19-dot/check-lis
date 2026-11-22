@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Check-Lis Taller · Mantenimiento Industrial</title>
+<meta name="description" content="Ingreso y chequeo de equipos en taller: fichas, firmas, PDF, QR y entrega de turno.">
+<meta name="theme-color" content="#002a4a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Check-Lis">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="splash" id="splash"><img id="splash-logo" src="img/logo-inv.png" alt="Mantenimiento Industrial" width="300" height="98"><div class="m">Check<span>-</span>Lis</div><div class="tr"><b></b></div><p>Preparando el taller</p></div>
+<div id="app"></div>
+<div id="ov"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="firebase-config.js"></script>
+<script src="vendor/firebase-app-compat.js"></script>
+<script src="vendor/firebase-auth-compat.js"></script>
+<script src="vendor/firebase-firestore-compat.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

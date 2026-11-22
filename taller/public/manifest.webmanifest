@@ -1,0 +1,17 @@
+{
+  "name": "Check-Lis Taller · Mantenimiento Industrial",
+  "short_name": "Check-Lis",
+  "description": "Ingreso y chequeo de equipos en taller.",
+  "lang": "es-CL",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#002a4a",
+  "theme_color": "#002a4a",
+  "icons": [
+    {"src": "img/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

@@ -1,0 +1,38 @@
+rules_version = '2';
+// Reglas de seguridad de Check-Lis Taller.
+// Solo entran personas aprobadas por el administrador (rol en config/app.roles).
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function signed() { return request.auth != null; }
+    function cfgPath() { return /databases/$(db)/documents/config/app; }
+    function myRole() {
+      return exists(cfgPath()) ? get(cfgPath()).data.roles.get(request.auth.uid, '') : '';
+    }
+    function member() { return signed() && myRole() in ['admin', 'supervisor', 'mecanico', 'operador']; }
+    function worker() { return signed() && myRole() in ['admin', 'supervisor', 'mecanico']; }
+    function sup()    { return signed() && myRole() in ['admin', 'supervisor']; }
+    function admin()  { return signed() && myRole() == 'admin'; }
+
+    // Configuración del taller y roles. La primera persona crea el taller y queda como administrador.
+    match /config/app {
+      allow read: if signed();
+      allow create: if signed()
+        && request.resource.data.roles.keys().hasOnly([request.auth.uid])
+        && request.resource.data.roles[request.auth.uid] == 'admin';
+      allow update: if admin();
+      allow delete: if false;
+    }
+
+    // Datos de cada persona: cada uno edita los suyos; el administrador ve todos para aprobarlos.
+    match /personas/{uid} {
+      allow read: if signed() && (request.auth.uid == uid || member());
+      allow create, update: if signed() && request.auth.uid == uid;
+      allow delete: if admin();
+    }
+
+    match /fichas/{id}   { allow read: if member(); allow create, update: if worker(); allow delete: if sup(); }
+    match /fotos/{id}    { allow read: if member(); allow create, update, delete: if worker(); }
+    match /equipos/{id}  { allow read: if member(); allow create, update: if worker(); allow delete: if sup(); }
+    match /entregas/{id} { allow read: if member(); allow create, update, delete: if sup(); }
+  }
+}
